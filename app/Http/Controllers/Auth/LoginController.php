@@ -44,6 +44,7 @@ class LoginController extends Controller
 
     public function redirectToLine()
     {
+        // Send user's request to Line
         return Socialite::driver('line')->redirect();
     }
 
@@ -51,29 +52,25 @@ class LoginController extends Controller
     public function handleLineCallback()
     {
         try {
-
+            // Get user data from line
             $user = Socialite::driver('line')->stateless()->user();
-
-            //dd($user);
-
+            // Register or login user
             $this->_registerOrLoginUser($user);
             //return Home After login
-
             return redirect()->route('home');
 
         }catch (\Exception $e) {
             // Log the exception if needed
             Log::error($e->getMessage());
-
-
         }
     }
 
     protected function _registerOrLoginUser($data)
     {
         try {
+            // Check if user exists
             $user = User::where('provider_id', $data->id)->first();
-
+            // If user does not exist, register user
             if ($user == null) {
                 $user = User::create([
                     'name' => $data->name,
@@ -82,11 +79,11 @@ class LoginController extends Controller
                     'avatar' => $data->avatar,
                 ]);
             }
-
+            // Login the user
             Auth::login($user);
         } catch (\Exception $e) {
+            // Log the exception if needed
             dd($e->getMessage());
         }
     }
-
 }
