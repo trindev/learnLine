@@ -48,7 +48,7 @@ class LineController extends Controller
         ]);
 
         // User ID ที่ต้องการส่งข้อความหา
-        $userId = $request->input('user_id'); // หรือกำหนดเป็นค่าโดยตรง
+        $userId = $request->input('user_id'); // ไอดีของผู้ใช้งาน
         $message = $request->input('message', 'Hello from Default!'); // ข้อความที่ต้องการส่ง
 
         // สร้างข้อความที่ต้องการส่ง
