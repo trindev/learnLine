@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\LineController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::get('/getUsers', [LineController::class, 'getUsers']);
 Route::post('/line/send', [LineController::class, 'sendMessage']);
 
