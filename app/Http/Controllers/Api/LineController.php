@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\HealthReport;
 use Illuminate\Http\Response;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
@@ -56,76 +57,39 @@ class LineController extends Controller
 
         $userId = $validatedData['user_id'];
         $type = $validatedData['type'];
-        $temp = $validatedData['temp'] ?? 'N/A';
-        $HR = $validatedData['HR'] ?? 'N/A';
-        $Sys = $validatedData['Sys'] ?? 'N/A';
-        $Dis = $validatedData['Dis'] ?? 'N/A';
-        $status = $validatedData['status'] ?? 'N/A';
+        $data = [
+            'temp' => $validatedData['temp'] ?? 'N/A',
+            'HR' => $validatedData['HR'] ?? 'N/A',
+            'Sys' => $validatedData['Sys'] ?? 'N/A',
+            'Dis' => $validatedData['Dis'] ?? 'N/A',
+            'status' => $validatedData['status'] ?? 'N/A',
+        ];
 
-        // กำหนดข้อความที่ต้องการส่ง
-        $message = $this->buildMessage($type, $temp, $HR, $Sys, $Dis, $status);
+        // บันทึกข้อมูลลงฐานข้อมูล
+        if (!$this->saveData($userId, $data['temp'], $data['HR'], $data['Sys'], $data['Dis'], $data['status'])) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to save health data.',
+            ], 500);
+        }
 
-        // ส่งข้อความธรรมดาไปยัง LINE
-        //$result = $this->sendTextMessage($userId, $message);
+        // สร้าง Flex Message
+        $flexDataJson = $this->createFlexMessage($type, $data);
 
-        // User ID ที่ต้องการส่งข้อความหา
-        //$userId = $request->input('user_id'); // ไอดีของผู้ใช้งาน
-        //$message = $request->input('message', 'Hello from Default!'); // ข้อความที่ต้องการส่ง
+        $datas = [
+            'url' => "https://api.line.me/v2/bot/message/push",
+            'token' => $this->channelAccessToken,
+        ];
 
-        // สร้างข้อความที่ต้องการส่ง
-        $textMessageBuilder = new TextMessageBuilder($message);
-        $response = $this->bot->pushMessage($userId, $textMessageBuilder);
+        $messages = [
+            'to' => $userId,
+            'messages' => [json_decode($flexDataJson, true)],
+        ];
 
-        $flexDataJson = '{
-            "type": "flex",
-            "altText": "This is a Flex Message",
-            "contents": {
-                "type": "bubble",
-                "direction": "ltr",
-                "header": {
-                    "type": "box",
-                    "layout": "vertical",
-                    "contents": [
-                        {
-                            "type": "text",
-                            "text": "Header",
-                            "align": "center"
-                        }
-                    ]
-                },
-                "hero": {
-                    "type": "image",
-                    "url": "https://www.w3schools.com/w3css/img_lights.jpg",
-                    "size": "full",
-                    "aspectRatio": "1.51:1",
-                    "aspectMode": "fit"
-                },
-                "body": {
-                    "type": "box",
-                    "layout": "vertical",
-                    "contents": [
-                        {
-                            "type": "text",
-                            "text": "Body",
-                            "align": "center"
-                        }
-                    ]
-                }
-            }
-        }';
-        unset($datas);
-        unset($messages);
-        $flexDataJsonDeCode = json_decode($flexDataJson,true);
-        $datas['url'] = "https://api.line.me/v2/bot/message/push";
-        $datas['token'] = $this->channelAccessToken;
-        $messages['to'] = "$userId";
-        $messages['messages'][] = $flexDataJsonDeCode;
-        $encodeJson = json_encode($messages);
-
-        $this->sendLine($encodeJson,$datas);
+        $response = $this->sendLine(json_encode($messages), $datas);
 
         // ตรวจสอบผลลัพธ์การส่งข้อความ
-        if ($response->isSucceeded()) {
+        if ($response) {
             return response()->json([
                 'status' => 'success',
                 'message' => 'Message sent successfully.',
@@ -136,6 +100,209 @@ class LineController extends Controller
             'status' => 'error',
             'message' => $response->getRawBody(),
         ], 500);
+    }
+
+    private function createFlexMessage($type, $data)
+    {
+        switch ($type) {
+            case 1:
+                return json_encode([
+                    'type' => 'flex',
+                    'altText' => 'Health Monitoring: Temperature',
+                    'contents' => [
+                        'type' => 'bubble',
+                        'direction' => 'ltr',
+                        'header' => [
+                            'type' => 'box',
+                            'layout' => 'vertical',
+                            'contents' => [
+                                [
+                                    'type' => 'text',
+                                    'text' => 'Temperature Report',
+                                    'weight' => 'bold',
+                                    'size' => 'lg',
+                                    'align' => 'center',
+                                    'color' => '#1DB446',
+                                ]
+                            ]
+                        ],
+                        'body' => [
+                            'type' => 'box',
+                            'layout' => 'vertical',
+                            'contents' => [
+                                $this->createFlexRow('Temperature', $data['temp'] . '°C', '#FF6B6B'),
+                                ['type' => 'separator', 'margin' => 'md'],
+                                $this->createFlexRow('Status', $data['status'], '#1DB446'),
+                            ],
+                            'spacing' => 'md',
+                        ],
+                        'footer' => [
+                            'type' => 'box',
+                            'layout' => 'vertical',
+                            'contents' => [
+                                [
+                                    'type' => 'text',
+                                    'text' => 'Monitor your health with us',
+                                    'align' => 'center',
+                                    'size' => 'sm',
+                                    'color' => '#888888',
+                                ]
+                            ]
+                        ]
+                    ]
+                ]);
+            case 2:
+                return json_encode([
+                    'type' => 'flex',
+                    'altText' => 'Health Monitoring: SPO2 & HR',
+                    'contents' => [
+                        'type' => 'bubble',
+                        'direction' => 'ltr',
+                        'header' => [
+                            'type' => 'box',
+                            'layout' => 'vertical',
+                            'contents' => [
+                                [
+                                    'type' => 'text',
+                                    'text' => 'Health Report',
+                                    'weight' => 'bold',
+                                    'size' => 'lg',
+                                    'align' => 'center',
+                                    'color' => '#1DB446',
+                                ]
+                            ]
+                        ],
+                        'body' => [
+                            'type' => 'box',
+                            'layout' => 'vertical',
+                            'contents' => [
+                                $this->createFlexRow('SPO2', $data['temp'] . '%', '#FF6B6B'),
+                                ['type' => 'separator', 'margin' => 'md'],
+                                $this->createFlexRow('HR', $data['HR'] . ' bpm', '#FF6B6B'),
+                                ['type' => 'separator', 'margin' => 'md'],
+                                $this->createFlexRow('Status', $data['status'], '#1DB446'),
+                            ],
+                            'spacing' => 'md',
+                        ],
+                        'footer' => [
+                            'type' => 'box',
+                            'layout' => 'vertical',
+                            'contents' => [
+                                [
+                                    'type' => 'text',
+                                    'text' => 'Monitor your health with us',
+                                    'align' => 'center',
+                                    'size' => 'sm',
+                                    'color' => '#888888',
+                                ]
+                            ]
+                        ]
+                    ]
+                ]);
+            case 3:
+                return json_encode([
+                    'type' => 'flex',
+                    'altText' => 'Health Monitoring: Blood Pressure & HR',
+                    'contents' => [
+                        'type' => 'bubble',
+                        'direction' => 'ltr',
+                        'header' => [
+                            'type' => 'box',
+                            'layout' => 'vertical',
+                            'contents' => [
+                                [
+                                    'type' => 'text',
+                                    'text' => 'Blood Pressure Report',
+                                    'weight' => 'bold',
+                                    'size' => 'lg',
+                                    'align' => 'center',
+                                    'color' => '#1DB446',
+                                ]
+                            ]
+                        ],
+                        'body' => [
+                            'type' => 'box',
+                            'layout' => 'vertical',
+                            'contents' => [
+                                $this->createFlexRow('Systolic', $data['Sys'] . ' mmHg', '#FF6B6B'),
+                                ['type' => 'separator', 'margin' => 'md'],
+                                $this->createFlexRow('Diastolic', $data['Dis'] . ' mmHg', '#FF6B6B'),
+                                ['type' => 'separator', 'margin' => 'md'],
+                                $this->createFlexRow('HR', $data['HR'] . ' bpm', '#FF6B6B'),
+                            ],
+                            'spacing' => 'md',
+                        ],
+                        'footer' => [
+                            'type' => 'box',
+                            'layout' => 'vertical',
+                            'contents' => [
+                                [
+                                    'type' => 'text',
+                                    'text' => 'Monitor your health with us',
+                                    'align' => 'center',
+                                    'size' => 'sm',
+                                    'color' => '#888888',
+                                ]
+                            ]
+                        ]
+                    ]
+                ]);
+            default:
+                return '{}';
+        }
+    }
+
+    private function createFlexRow($label, $value, $color)
+    {
+        return [
+            'type' => 'box',
+            'layout' => 'baseline',
+            'contents' => [
+                [
+                    'type' => 'text',
+                    'text' => $label,
+                    'flex' => 2,
+                    'weight' => 'bold',
+                    'size' => 'md',
+                    'color' => '#000000',
+                ],
+                [
+                    'type' => 'text',
+                    'text' => $value,
+                    'flex' => 3,
+                    'align' => 'end',
+                    'weight' => 'bold',
+                    'size' => 'md',
+                    'color' => $color,
+                ]
+            ]
+        ];
+    }
+
+
+    private function saveData($userId, $temp, $HR, $Sys, $Dis, $status)
+    {
+        try {
+            $user = User::Where('provider_id', $userId)->first();
+            if (!$user) {
+                return false;
+            }
+            $id = $user->id;
+            // บันทึกข้อมูลโดยใช้ Model
+            HealthReport::create([
+                'user_id' => $id,
+                'temp' => $temp,
+                'heart_rate' => $HR,
+                'systolic' => $Sys,
+                'diastolic' => $Dis,
+                'status' => $status,
+            ]);
+
+            return true;
+        } catch (\Exception $e) {
+            \Log::error("Failed to save health data: " . $e->getMessage());
+            return false;
+        }
     }
 
     private function sentMessage($lid,$msg)
