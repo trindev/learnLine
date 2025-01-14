@@ -120,7 +120,7 @@ class LineController extends Controller
                             'contents' => [
                                 [
                                     'type' => 'image',
-                                    'url' => 'https://cdn.discordapp.com/attachments/1105063479892770926/1328059539144310964/2944675.png?ex=67855354&is=678401d4&hm=5652a0653e8ba18a02de19757c1b0b2831b753615fb2f96d07c9370d6982bea4&', // ลิงก์รูปไอคอนของ Body Temperature
+                                    'url' => 'https://check.devtrin.com/images/BodyIcon.png', // ลิงก์รูปไอคอนของ Body Temperature
                                     'size' => 'lg',
                                     'aspectMode' => 'cover',
                                     'align' => 'center',
@@ -223,12 +223,11 @@ class LineController extends Controller
                             'layout' => 'vertical',
                             'contents' => [
                                 [
-                                    'type' => 'text',
-                                    'text' => 'Health Report',
-                                    'weight' => 'bold',
+                                    'type' => 'image',
+                                    'url' => 'https://check.devtrin.com/images/SPO2Icon.png', // ลิงก์รูปไอคอน SPO2
                                     'size' => 'lg',
+                                    'aspectMode' => 'cover',
                                     'align' => 'center',
-                                    'color' => '#1DB446',
                                 ]
                             ]
                         ],
@@ -236,6 +235,14 @@ class LineController extends Controller
                             'type' => 'box',
                             'layout' => 'vertical',
                             'contents' => [
+                                [
+                                    'type' => 'text',
+                                    'text' => 'Health Report',
+                                    'weight' => 'bold',
+                                    'size' => 'lg',
+                                    'align' => 'center',
+                                    'color' => '#1DB446',
+                                ],
                                 $this->createFlexRow('SPO2', $data['spo2'] . '%', '#FF6B6B'),
                                 ['type' => 'separator', 'margin' => 'md'],
                                 $this->createFlexRow('HR', $data['HR'] . ' bpm', '#FF6B6B'),
@@ -271,12 +278,11 @@ class LineController extends Controller
                             'layout' => 'vertical',
                             'contents' => [
                                 [
-                                    'type' => 'text',
-                                    'text' => 'Blood Pressure Report',
-                                    'weight' => 'bold',
+                                    'type' => 'image',
+                                    'url' => 'https://check.devtrin.com/images/BloodPressureIcon.png', // ลิงก์รูปไอคอน Blood Pressure
                                     'size' => 'lg',
+                                    'aspectMode' => 'cover',
                                     'align' => 'center',
-                                    'color' => '#1DB446',
                                 ]
                             ]
                         ],
@@ -284,6 +290,14 @@ class LineController extends Controller
                             'type' => 'box',
                             'layout' => 'vertical',
                             'contents' => [
+                                [
+                                    'type' => 'text',
+                                    'text' => 'Blood Pressure Report',
+                                    'weight' => 'bold',
+                                    'size' => 'lg',
+                                    'align' => 'center',
+                                    'color' => '#1DB446',
+                                ],
                                 $this->createFlexRow('Systolic', $data['Sys'] . ' mmHg', '#FF6B6B'),
                                 ['type' => 'separator', 'margin' => 'md'],
                                 $this->createFlexRow('Diastolic', $data['Dis'] . ' mmHg', '#FF6B6B'),
