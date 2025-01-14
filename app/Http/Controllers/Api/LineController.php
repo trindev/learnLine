@@ -52,6 +52,7 @@ class LineController extends Controller
             'HR' => 'nullable|string',
             'Sys' => 'nullable|string',
             'Dis' => 'nullable|string',
+            'spo2' => 'nullable|string',
             'status' => 'nullable|string',
         ]);
 
@@ -62,11 +63,12 @@ class LineController extends Controller
             'HR' => $validatedData['HR'] ?? 'N/A',
             'Sys' => $validatedData['Sys'] ?? 'N/A',
             'Dis' => $validatedData['Dis'] ?? 'N/A',
+            'spo2' => $validatedData['spo2'] ?? 'N/A',
             'status' => $validatedData['status'] ?? 'N/A',
         ];
 
         // บันทึกข้อมูลลงฐานข้อมูล
-        if (!$this->saveData($userId, $data['temp'], $data['HR'], $data['Sys'], $data['Dis'], $data['status'])) {
+        if (!$this->saveData($userId, $data['temp'], $data['HR'], $data['Sys'], $data['Dis'], $data['status'], $data['spo2'])) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Failed to save health data.',
@@ -117,12 +119,11 @@ class LineController extends Controller
                             'layout' => 'vertical',
                             'contents' => [
                                 [
-                                    'type' => 'text',
-                                    'text' => 'Temperature Report',
-                                    'weight' => 'bold',
+                                    'type' => 'image',
+                                    'url' => 'https://cdn.discordapp.com/attachments/1105063479892770926/1328059539144310964/2944675.png?ex=67855354&is=678401d4&hm=5652a0653e8ba18a02de19757c1b0b2831b753615fb2f96d07c9370d6982bea4&', // ลิงก์รูปไอคอนของ Body Temperature
                                     'size' => 'lg',
+                                    'aspectMode' => 'cover',
                                     'align' => 'center',
-                                    'color' => '#1DB446',
                                 ]
                             ]
                         ],
@@ -130,11 +131,62 @@ class LineController extends Controller
                             'type' => 'box',
                             'layout' => 'vertical',
                             'contents' => [
-                                $this->createFlexRow('Temperature', $data['temp'] . '°C', '#FF6B6B'),
-                                ['type' => 'separator', 'margin' => 'md'],
-                                $this->createFlexRow('Status', $data['status'], '#1DB446'),
-                            ],
-                            'spacing' => 'md',
+                                [
+                                    'type' => 'text',
+                                    'text' => 'Body Temperature',
+                                    'weight' => 'bold',
+                                    'size' => 'lg',
+                                    'align' => 'center',
+                                    'color' => '#000000',
+                                ],
+                                [
+                                    'type' => 'text',
+                                    'text' => 'Body Temperature',
+                                    'weight' => 'bold',
+                                    'size' => 'sm',
+                                    'color' => '#888888',
+                                    'align' => 'center',
+                                    'margin' => 'md',
+                                ],
+                                [
+                                    'type' => 'text',
+                                    'text' => $data['temp'] . '°C',
+                                    'weight' => 'bold',
+                                    'size' => 'xxl',
+                                    'color' => '#FF6B6B',
+                                    'align' => 'center',
+                                    'margin' => 'sm',
+                                ],
+                                [
+                                    'type' => 'separator',
+                                    'margin' => 'lg'
+                                ],
+                                [
+                                    'type' => 'box',
+                                    'layout' => 'baseline',
+                                    'contents' => [
+                                        [
+                                            'type' => 'text',
+                                            'text' => 'Status',
+                                            'weight' => 'bold',
+                                            'size' => 'sm',
+                                            'color' => '#888888',
+                                            'flex' => 1,
+                                        ],
+                                        [
+                                            'type' => 'text',
+                                            'text' => $data['status'],
+                                            'weight' => 'bold',
+                                            'size' => 'sm',
+                                            'color' => $data['status'] == 'Normal' ? '#1DB446' : '#FF6B6B',
+                                            'align' => 'end',
+                                            'flex' => 2,
+                                        ]
+                                    ],
+                                    'spacing' => 'sm',
+                                    'margin' => 'lg'
+                                ]
+                            ]
                         ],
                         'footer' => [
                             'type' => 'box',
@@ -147,6 +199,14 @@ class LineController extends Controller
                                     'size' => 'sm',
                                     'color' => '#888888',
                                 ]
+                            ]
+                        ],
+                        'styles' => [
+                            'header' => [
+                                'backgroundColor' => '#F0F8FF'
+                            ],
+                            'footer' => [
+                                'backgroundColor' => '#F0F8FF'
                             ]
                         ]
                     ]
@@ -176,7 +236,7 @@ class LineController extends Controller
                             'type' => 'box',
                             'layout' => 'vertical',
                             'contents' => [
-                                $this->createFlexRow('SPO2', $data['temp'] . '%', '#FF6B6B'),
+                                $this->createFlexRow('SPO2', $data['spo2'] . '%', '#FF6B6B'),
                                 ['type' => 'separator', 'margin' => 'md'],
                                 $this->createFlexRow('HR', $data['HR'] . ' bpm', '#FF6B6B'),
                                 ['type' => 'separator', 'margin' => 'md'],
@@ -280,7 +340,7 @@ class LineController extends Controller
     }
 
 
-    private function saveData($userId, $temp, $HR, $Sys, $Dis, $status)
+    private function saveData($userId, $temp, $HR, $Sys, $Dis, $status, $spo2)
     {
         try {
             $user = User::Where('provider_id', $userId)->first();
@@ -292,6 +352,7 @@ class LineController extends Controller
             HealthReport::create([
                 'user_id' => $id,
                 'temp' => $temp,
+                'spo2' => $spo2,
                 'heart_rate' => $HR,
                 'systolic' => $Sys,
                 'diastolic' => $Dis,

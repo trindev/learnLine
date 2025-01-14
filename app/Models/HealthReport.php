@@ -23,5 +23,6 @@ class HealthReport extends Model
         'systolic',
         'diastolic',
         'status',
+        'spo2',
     ];
 }

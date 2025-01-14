@@ -25,7 +25,7 @@ class User extends Authenticatable
         'avatar',
         'display_name',
         'phone',
-
+        'flag',
     ];
 
     /**

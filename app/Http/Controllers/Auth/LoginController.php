@@ -9,6 +9,8 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
+use LINE\LINEBot;
+use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 
 class LoginController extends Controller
 {
@@ -31,6 +33,7 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+    protected $channelAccessToken;
 
     /**
      * Create a new controller instance.
@@ -40,6 +43,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->channelAccessToken = env('LINE_ACCESS_TOKEN');
     }
 
     public function redirectToLine()
@@ -77,13 +81,44 @@ class LoginController extends Controller
                     'email' => $data->email,
                     'provider_id' => $data->id,
                     'avatar' => $data->avatar,
+                    'flag' => 0,
                 ]);
             }
             // Login the user
             Auth::login($user);
+            // Set Rich Menu
+            $this->setRichMenuToUser($user->provider_id);
+            // update user flag
+            $user->flag = 1;
+
         } catch (\Exception $e) {
             // Log the exception if needed
             dd($e->getMessage());
+        }
+    }
+    private function setRichMenuToUser($user)
+    {
+        $channelAccessToken = $this->channelAccessToken; // ใช้ channel access token จาก .env;
+        $channelSecret = env('LINE_CHANNEL_SECRET');
+        $lineUserId = $user; // ใช้ provider_id จาก User model
+
+        // กำหนด Rich Menu ตามสถานะของผู้ใช้
+        //$richMenuId = 'richmenu-effbc57726f8aa18546090c31e40c20c'; // รหัส Rich Menu Register
+        $richMenuId = 'richmenu-f3c42293a6ad7611619a6d1b16355cfe'; // รหัส Rich Menu Register success
+
+        $httpClient = new CurlHTTPClient($channelAccessToken);
+        $bot = new LINEBot($httpClient, ['channelSecret' => $channelSecret]);
+
+        // ลิงค์ Rich Menu
+        $response = $bot->linkRichMenu($lineUserId, $richMenuId);
+
+        if ($response->isSucceeded()) {
+            return response()->json(['message' => 'Rich Menu set successfully!']);
+        } else {
+            // เพิ่มการตรวจสอบข้อผิดพลาดเพิ่มเติม
+            $errorMessage = $response->getRawBody();
+            \Log::error('Failed to set Rich Menu: ' . $errorMessage); // บันทึกข้อผิดพลาดใน log
+            return response()->json(['message' => 'Failed to set Rich Menu: ' . $errorMessage], 500);
         }
     }
 }
