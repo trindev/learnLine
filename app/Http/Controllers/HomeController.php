@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\HealthReport;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,5 +24,16 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function myData()
+    {
+        // ดึงข้อมูลทั้งหมดของผู้ใช้
+        $data = HealthReport::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+
+        // ดึงข้อมูลล่าสุด
+        $latestData = $data->first();
+
+        return view('myData', compact('data', 'latestData'));
     }
 }

@@ -104,7 +104,7 @@ class LoginController extends Controller
 
         // กำหนด Rich Menu ตามสถานะของผู้ใช้
         //$richMenuId = 'richmenu-effbc57726f8aa18546090c31e40c20c'; // รหัส Rich Menu Register
-        $richMenuId = 'richmenu-f3c42293a6ad7611619a6d1b16355cfe'; // รหัส Rich Menu Register success
+        $richMenuId = 'richmenu-d8e1ae9f0e73fbfe633529d408a1688e'; // รหัส Rich Menu Register success
 
         $httpClient = new CurlHTTPClient($channelAccessToken);
         $bot = new LINEBot($httpClient, ['channelSecret' => $channelSecret]);
