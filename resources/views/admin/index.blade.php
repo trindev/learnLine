@@ -32,6 +32,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
 
     <style>
       body {
@@ -41,6 +42,13 @@
         font-style: normal;
         font-variation-settings:
           "wdth" 100;
+      }
+      .logo{
+        font-family: "Josefin Sans", serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+        font-size: 19px;
       }
     </style>
       
@@ -93,10 +101,13 @@
         <!-- App brand starts -->
         <div class="app-brand ms-3">
           <a href="index.html" class="d-lg-block d-none">
-            <img src="assets/images/logo.svg" class="logo" alt="Medicare Admin Template">
+            <img src="{{ asset('images/logo.png') }}" class="logo" alt="Medicare Admin Template">
+            <label for="" class="text-white logo">Smart Health Monitor</label>
           </a>
           <a href="index.html" class="d-lg-none d-md-block">
-            <img src="assets/images/logo-sm.svg" class="logo" alt="Medicare Admin Template">
+            <!-- <img src="assets/images/logo-sm.svg" class="logo" alt="Medicare Admin Template"> -->
+            <!-- <img src="{{ asset('images/logo.png') }}" class="logo" alt="Medicare Admin Template"> -->
+            <label for="" class="text-white logo">Smart Health Monitor</label>
           </a>
         </div>
         <!-- App brand ends -->
@@ -104,294 +115,11 @@
         <!-- App header actions starts -->
         <div class="header-actions">
 
-          <!-- Search container starts -->
-          <div class="search-container d-lg-block d-none mx-3">
-            <input type="text" class="form-control" id="searchId" placeholder="Search">
-            <i class="ri-search-line"></i>
-          </div>
-          <!-- Search container ends -->
-
-          <!-- Header actions starts -->
-          <div class="d-lg-flex d-none gap-2">
-
-            <!-- Select country dropdown starts -->
-            <div class="dropdown">
-              <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <img src="assets/images/flags/1x1/fr.svg" class="header-country-flag" alt="Bootstrap Dashboards">
-              </a>
-              <div class="dropdown-menu dropdown-menu-end dropdown-mini">
-                <div class="country-container">
-                  <a href="index.html" class="py-2">
-                    <img src="assets/images/flags/1x1/us.svg" alt="Admin Panel">
-                  </a>
-                  <a href="index.html" class="py-2">
-                    <img src="assets/images/flags/1x1/in.svg" alt="Admin Panels">
-                  </a>
-                  <a href="index.html" class="py-2">
-                    <img src="assets/images/flags/1x1/br.svg" alt="Admin Dashboards">
-                  </a>
-                  <a href="index.html" class="py-2">
-                    <img src="assets/images/flags/1x1/tr.svg" alt="Admin Templatess">
-                  </a>
-                  <a href="index.html" class="py-2">
-                    <img src="assets/images/flags/1x1/gb.svg" alt="Google Admin">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- Select country dropdown ends -->
-
-            <!-- Notifications dropdown starts -->
-            <div class="dropdown">
-              <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <i class="ri-list-check-3"></i>
-                <span class="count-label warning"></span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-end dropdown-300">
-                <h5 class="fw-semibold px-3 py-2 text-primary">Activity</h5>
-
-                <!-- Scroll starts -->
-                <div class="scroll300">
-
-                  <!-- Activity List Starts -->
-                  <div class="p-3">
-                    <ul class="p-0 activity-list2">
-                      <li class="activity-item pb-3 mb-3">
-                        <a href="#!">
-                          <h5 class="fw-regular">
-                            <i class="ri-circle-fill text-danger me-1"></i>
-                            Invoices.
-                          </h5>
-                          <div class="ps-3 ms-2 border-start">
-                            <div class="d-flex align-items-center mb-2">
-                              <div class="flex-shrink-0">
-                                <img src="assets/images/products/1.jpg" class="img-shadow img-3x rounded-1"
-                                  alt="Hospital Admin Templates">
-                              </div>
-                              <div class="flex-grow-1 ms-3">
-                                23 invoices have been paid to the MediCare Labs.
-                              </div>
-                            </div>
-                            <p class="m-0 small">10:20AM Today</p>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="activity-item pb-3 mb-3">
-                        <a href="#!">
-                          <h5 class="fw-regular">
-                            <i class="ri-circle-fill text-info me-1"></i>
-                            Purchased.
-                          </h5>
-                          <div class="ps-3 ms-2 border-start">
-                            <div class="d-flex align-items-center mb-2">
-                              <div class="flex-shrink-0">
-                                <img src="assets/images/products/2.jpg" class="img-shadow img-3x rounded-1"
-                                  alt="Hospital Admin Templates">
-                              </div>
-                              <div class="flex-grow-1 ms-3">
-                                28 new surgical equipments have been purchased.
-                              </div>
-                            </div>
-                            <p class="m-0 small">04:30PM Today</p>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="activity-item pb-3 mb-3">
-                        <a href="#!">
-                          <h5 class="fw-regular">
-                            <i class="ri-circle-fill text-success me-1"></i>
-                            Appointed.
-                          </h5>
-                          <div class="ps-3 ms-2 border-start">
-                            <div class="d-flex align-items-center mb-2">
-                              <div class="flex-shrink-0">
-                                <img src="assets/images/products/8.jpg" class="img-shadow img-3x rounded-1"
-                                  alt="Hospital Admin Templates">
-                              </div>
-                              <div class="flex-grow-1 ms-3">
-                                36 new doctors and 28 staff members appointed.
-                              </div>
-                            </div>
-                            <p class="m-0 small">06:50PM Today</p>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="activity-item">
-                        <a href="#!">
-                          <h5 class="fw-regular">
-                            <i class="ri-circle-fill text-warning me-1"></i>
-                            Requested
-                          </h5>
-                          <div class="ps-3 ms-2 border-start">
-                            <div class="d-flex align-items-center mb-2">
-                              <div class="flex-shrink-0">
-                                <img src="assets/images/products/9.jpg" class="img-shadow img-3x rounded-1"
-                                  alt="Hospital Admin Templates">
-                              </div>
-                              <div class="flex-grow-1 ms-3">
-                                Requested for 6 new vehicles for medical emergency. .
-                              </div>
-                            </div>
-                            <p class="m-0 small">08:30PM Today</p>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- Activity List Ends -->
-
-                </div>
-                <!-- Scroll ends -->
-
-                <!-- View all button starts -->
-                <div class="d-grid m-3">
-                  <a href="javascript:void(0)" class="btn btn-primary">View all</a>
-                </div>
-                <!-- View all button ends -->
-
-              </div>
-            </div>
-            <!-- Notifications dropdown ends -->
-
-            <!-- Notifications dropdown starts -->
-            <div class="dropdown">
-              <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <i class="ri-alarm-warning-line"></i>
-                <span class="count-label success"></span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-end dropdown-300">
-                <h5 class="fw-semibold px-3 py-2 text-primary">Alerts</h5>
-
-                <!-- Scroll starts -->
-                <div class="scroll300">
-
-                  <!-- Alert list starts -->
-                  <div class="p-3">
-                    <div class="d-flex py-2">
-                      <div class="icon-box md bg-info rounded-circle me-3">
-                        <span class="fw-bold fs-6 text-white">DS</span>
-                      </div>
-                      <div class="m-0">
-                        <h6 class="mb-1 fw-semibold">Douglass Shaw</h6>
-                        <p class="mb-1">
-                          Appointed as a new President 2014-2025
-                        </p>
-                        <p class="small m-0 opacity-50">Today, 07:30pm</p>
-                      </div>
-                    </div>
-                    <div class="d-flex py-2">
-                      <div class="icon-box md bg-danger rounded-circle me-3">
-                        <span class="fw-bold fs-6 text-white">WG</span>
-                      </div>
-                      <div class="m-0">
-                        <h6 class="mb-1 fw-semibold">Willie Garrison</h6>
-                        <p class="mb-1">
-                          Congratulate, James for new job.
-                        </p>
-                        <p class="small m-0 opacity-50">Today, 08:00pm</p>
-                      </div>
-                    </div>
-                    <div class="d-flex py-2">
-                      <div class="icon-box md bg-warning rounded-circle me-3">
-                        <span class="fw-bold fs-6 text-white">TJ</span>
-                      </div>
-                      <div class="m-0">
-                        <h6 class="mb-1 fw-semibold">Terry Jenkins</h6>
-                        <p class="mb-1">
-                          Lewis added new doctors training schedule.
-                        </p>
-                        <p class="small m-0 opacity-50">Today, 09:30pm</p>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Alert list ends -->
-
-                </div>
-                <!-- Scroll ends -->
-
-                <!-- View all button starts -->
-                <div class="d-grid m-3">
-                  <a href="javascript:void(0)" class="btn btn-primary">View all</a>
-                </div>
-                <!-- View all button ends -->
-
-              </div>
-            </div>
-            <!-- Notifications dropdown ends -->
-
-            <!-- Messages dropdown starts -->
-            <div class="dropdown">
-              <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <i class="ri-message-3-line"></i>
-                <span class="count-label"></span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-end dropdown-300">
-                <h5 class="fw-semibold px-3 py-2 text-primary">Messages</h5>
-
-                <!-- Scroll starts -->
-                <div class="scroll300">
-
-                  <!-- Messages list starts -->
-                  <div class="p-3">
-                    <div class="d-flex py-2">
-                      <img src="assets/images/user3.png" class="img-shadow img-3x me-3 rounded-5"
-                        alt="Hospital Admin Templates">
-                      <div class="m-0">
-                        <h6 class="mb-1 fw-semibold">Nick Gonzalez  </h6>
-                        <p class="mb-1">
-                          Appointed as a new President 2014-2025
-                        </p>
-                        <p class="small m-0 opacity-50">Today, 07:30pm</p>
-                      </div>
-                    </div>
-                    <div class="d-flex py-2">
-                      <img src="assets/images/user1.png" class="img-shadow img-3x me-3 rounded-5"
-                        alt="Hospital Admin Templates">
-                      <div class="m-0">
-                        <h6 class="mb-1 fw-semibold">Clyde Fowler</h6>
-                        <p class="mb-1">
-                          Congratulate, James for new job.
-                        </p>
-                        <p class="small m-0 opacity-50">Today, 08:00pm</p>
-                      </div>
-                    </div>
-                    <div class="d-flex py-2">
-                      <img src="assets/images/user4.png" class="img-shadow img-3x me-3 rounded-5"
-                        alt="Hospital Admin Templates">
-                      <div class="m-0">
-                        <h6 class="mb-1 fw-semibold">Sophie Michiels</h6>
-                        <p class="mb-1">
-                          Lewis added new doctors training schedule.
-                        </p>
-                        <p class="small m-0 opacity-50">Today, 09:30pm</p>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Messages list ends -->
-
-                </div>
-                <!-- Scroll ends -->
-
-                <!-- View all button starts -->
-                <div class="d-grid m-3">
-                  <a href="javascript:void(0)" class="btn btn-primary">View all</a>
-                </div>
-                <!-- View all button ends -->
-
-              </div>
-            </div>
-          </div>
-          <!-- Header actions ends -->
-
           <!-- Header user settings starts -->
-          <div class="dropdown ms-2">
+          <!-- <div class="dropdown ms-2">
             <a id="userSettings" class="dropdown-toggle d-flex align-items-center" href="#!" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
-              <div class="avatar-box">JB<span class="status busy"></span></div>
+              <div class="avatar-box"><i class="ri-user-fill"></i><span class="status busy"></span></div>
             </a>
             <div class="dropdown-menu dropdown-menu-end shadow-lg">
               <div class="px-3 py-2">
@@ -402,7 +130,7 @@
                 <a href="login.html" class="btn btn-danger">Logout</a>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- Header user settings ends -->
 
         </div>
@@ -418,13 +146,13 @@
         <nav id="sidebar" class="sidebar-wrapper">
 
           <!-- Sidebar profile starts -->
-          <div class="sidebar-profile">
+          <!-- <div class="sidebar-profile">
             <img src="assets/images/user6.png" class="img-shadow img-3x me-3 rounded-5" alt="Hospital Admin Templates">
             <div class="m-0">
               <h5 class="mb-1 profile-name text-nowrap text-truncate">Nick Gonzalez</h5>
               <p class="m-0 small profile-name text-nowrap text-truncate">Dept Admin</p>
             </div>
-          </div>
+          </div> -->
           <!-- Sidebar profile ends -->
 
           <!-- Sidebar menu starts -->
@@ -433,7 +161,7 @@
               <li class="active current-page">
                 <a href="{{ url('/admin') }}">
                   <i class="ri-home-6-line"></i>
-                  <span class="menu-text">Dashboard</span>
+                  <span class="menu-text">ข้อมูลการตรวจวัดทั่วไป</span>
                 </a>
               </li>
               <li>
@@ -447,13 +175,15 @@
           </div>
           <!-- Sidebar menu ends -->
 
+          
           <!-- Sidebar contact starts -->
           <div class="sidebar-contact">
-            <p class="fw-light mb-1 text-nowrap text-truncate">Emergency Contact</p>
-            <h5 class="m-0 lh-1 text-nowrap text-truncate">0987654321</h5>
+            <p class="fw-light mb-1 text-nowrap text-truncate">ติดต่อ</p>
+            <h5 class="m-0 lh-1 text-nowrap text-truncate">089-8266826</h5>
             <i class="ri-phone-line"></i>
           </div>
           <!-- Sidebar contact ends -->
+
 
         </nav>
         <!-- Sidebar wrapper ends -->
@@ -505,35 +235,139 @@
           <!-- App body starts -->
           <div class="app-body">
 
-            <!-- <div class="row gx-3">
-            <div class="card mb-3">
-              <div class="col-sm-4 col-12">
-                  <div class="card-body">
-                    <div class="m-0">
-                      <label class="form-label" for="abc10">Date</label>
-                      <div class="input-group">
-                        <span class="input-group-text">
-                          <i class="ri-calendar-check-line"></i>
-                        </span>
-                        <input type="text" id="abc10" class="form-control datepicker-range-auto-apply">
+
+
+            <!-- Row starts -->
+            <div class="row gx-3">
+              <div class="col-xxl-6 col-sm-12">
+                <div class="card mb-3 bg-1 mt-5">
+                  <div class="card-body mh-230 mt-3">
+
+                    <!-- Row starts -->
+                    <div class="row gx-3">
+                      <div class="col-sm-3">
+                        <img src="assets/images/doctor.svg" class="img-230 mt-n5" alt="Medical Dashboard">
+                      </div>
+                      <div class="col-sm-9">
+                        <div class="text-white mt-4">
+                          <h6>Hello,</h6>
+                          <h3>Welcome to Smart Health Monitor</h3>
+                          <!-- <h6>Gynecologist, MS, MD, MBBS</h6> -->
+                          <!-- <h5>You have total <span class="badge bg-danger">18 appointments</span> today.</h5> -->
+                          <div class="rating-stars">
+                            <div class="readonly5"></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-              </div>
-              <div class="col-sm-6 col-12">
-                fff
-              </div>
-              <div class="col-sm-2 col-12">
-                  <div class="card-body">
-                    <div class="m-0">
-                    <button type="button" class="btn btn-info">Search</button>
+                    <!-- Row ends -->
+
                   </div>
                 </div>
               </div>
+    
+              <div class="col-xxl-6 col-sm-12">
+                  <div class="card mb-3">
+                    <div class="card-header text-center ">
+                    <h5 >ผลการตรวจวัดล่าสุด</h5>
+                    </div>
+                  </div>
+                  <div class="row gx-3 ">
+
+                  <div class="row gx-3">
+                  <div class="col-xxl-4 col-sm-12">
+                    <div class="card mb-3">
+                      <div class="card-body mh-230">
+
+                        <!-- Card details start -->
+                        <div>
+                          <div class="d-flex flex-column align-items-center">
+                            <div  class="icon-box xl rounded-5 mb-2 no-shadow">
+                              <img src="{{ asset('images/BodyIcon.png') }}" class=" img-4x rounded-1"
+                                alt="Hospital Admin Templates">
+                            </div>
+                            <h1 class="text-danger ">24 ครั้ง</h1>
+                            <div class="badge bg-success d-flex align-items-center justify-content-center" style="height: 40px; width: 150px;">
+                              <h5 class="m-0">อุณหภูมิร่างกาย</h5>
+                            </div>
+                           
+                          </div>
+                        </div>
+                        <!-- Card details end -->
+
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-xxl-4 col-sm-12">
+                    <div class="card mb-3">
+                      <div class="card-body mh-230">
+
+                        <!-- Card details start -->
+                        <div>
+                          <div class="d-flex flex-column align-items-center">
+                            <div  class="icon-box xl rounded-5 mb-2 no-shadow">
+                              <img src="{{ asset('images/SPO2Icon.png') }}" class=" img-4x rounded-1"
+                                alt="Hospital Admin Templates">
+                            </div>
+                            <h1 class="text-danger">35 ครั้ง</h1>
+                            <div class="badge bg-warning d-flex align-items-center justify-content-center" style="height: 40px; width: 150px;">
+                              <h5 class="m-0">อ็อกซิเจนในเลือด</h5>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Card details end -->
+
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  <div class="col-xxl-4 col-sm-12">
+                    <div class="card mb-3">
+                      <div class="card-body mh-230">
+
+                        <!-- Card details start -->
+                        <div>
+                          <div class="d-flex flex-column align-items-center">
+                            <div  class="icon-box xl rounded-5 mb-2 no-shadow">
+                              <img src="{{ asset('images/BloodPressureIcon.png') }}" class=" img-4x rounded-1"
+                                alt="Hospital Admin Templates">
+                            </div>
+                            <h1 class="text-danger">25 ครั้ง</h1>
+                            <div class="badge bg-danger d-flex align-items-center justify-content-center" style="height: 40px; width: 150px;">
+                              <h5 class="m-0">ความดันโลหิต</h5>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Card details end -->
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                  </div>
+              </div>
+
             </div>
-            </div> -->
+            <!-- Row ends -->
+
+
+
+
 
             <div class="row gx-3">
+              <div class="col-xxl-6 col-sm-12">
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <h5 class="card-title">ตำแหน่งการใช้งานอุปกรณ์</h5>
+                  </div>
+                  <div class="card-body">
+                  </div>
+                </div>
+              </div>
               <div class="col-xxl-6 col-sm-12">
                 <div class="card mb-3">
                   <div class="card-header">
@@ -565,80 +399,50 @@
                     </div>
                   </div>
                   <div class="card-body">
-                    <div id="patients"></div>
+                    <!-- <div id="patients"></div> -->
+                    <div id="barColors" class="chart-height-lg"></div>
+                    <div id="legend" style="text-align: center; margin-top: 10px;">
+                      <span style="display: inline-block; width: 10px; height: 10px; background-color: #1169f6; margin-right: 5px;"></span> การใช้ (ครั้ง)
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="col-xxl-6 col-sm-12">
-                <div class="row gx-3">
-                  <div class="col-xxl-6 col-sm-12">
-                    <div class="card mb-3">
-                      <div class="card-body mh-230">
-
-                        <!-- Card details start -->
-                        <div>
-                          <div class="d-flex flex-column align-items-center">
-                            <div  class="icon-box xl rounded-5 mb-2 no-shadow">
-                              <img src="{{ asset('images/BodyIcon.png') }}" class=" img-4x rounded-1"
-                                alt="Hospital Admin Templates">
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <div class="row gx-3">
+                      <div class="col-xxl-5 col-sm-12">
+                        <h5 class="card-title">ลงทะเบียนผู้ใช้งานใหม่</h5>
+                      </div>
+                      <div class="col-xxl-7 col-sm-12">
+                        <div class="border rounded-2 d-flex align-items-center flex-row p-2">
+                          <div class="me-5">
+                          <div class="icon-box lg bg-primary-subtle rounded-5 mb-2 no-shadow">
+                            <i class="ri-empathize-line fs-1 text-primary"></i>
+                          </div>
+                          </div>
+                          <div class="m-0">
+                            <small>ลงทะเบียนผู้ใช้งานใหม รวมทั้งหมด</small>
+                            <div class="d-flex justify-content-end ">
+                              <h4 class="m-0 fw-bold">1,290 คน</h4>
                             </div>
-                            <h1 class="text-danger ">24 ครั้ง</h1>
-                            <h6>Body Temperature</h6>
                           </div>
                         </div>
-                        <!-- Card details end -->
-
                       </div>
                     </div>
                   </div>
-                  
-                  <div class="col-xxl-6 col-sm-12">
-                    <div class="card mb-3">
-                      <div class="card-body mh-230">
-
-                        <!-- Card details start -->
-                        <div>
-                          <div class="d-flex flex-column align-items-center">
-                            <div  class="icon-box xl rounded-5 mb-2 no-shadow">
-                              <img src="{{ asset('images/SPO2Icon.png') }}" class=" img-4x rounded-1"
-                                alt="Hospital Admin Templates">
-                            </div>
-                            <h1 class="text-danger">35 ครั้ง</h1>
-                            <h6>Health</h6>
-                          </div>
-                        </div>
-                        <!-- Card details end -->
-
-                      </div>
+                  <div class="card-body">
+                    <!-- <div id="patients"></div> -->
+                    <!-- <div id="barColors" class="chart-height-lg"></div> -->
+                    <div id="income"></div>
+                    <div id="legend" style="text-align: center; margin-top: 10px;">
+                      <span style="display: inline-block; width: 10px; height: 10px; background-color: #5087df; margin-right: 5px;"></span> ผู้ใช้งาน
                     </div>
                   </div>
-
-                  
-                  <div class="col-xxl-12 col-sm-12">
-                    <div class="card mb-3">
-                      <div class="card-body mh-230">
-
-                        <!-- Card details start -->
-                        <div>
-                          <div class="d-flex flex-column align-items-center">
-                            <div  class="icon-box xl rounded-5 mb-2 no-shadow">
-                              <img src="{{ asset('images/BloodPressureIcon.png') }}" class=" img-4x rounded-1"
-                                alt="Hospital Admin Templates">
-                            </div>
-                            <h1 class="text-danger">25 ครั้ง</h1>
-                            <h6>Blood Pressure</h6>
-                          </div>
-                        </div>
-                        <!-- Card details end -->
-
-                      </div>
-                    </div>
-                  </div>
-
                 </div>
-                  
+
+
               </div>
+
             </div>
 
           </div>
@@ -683,6 +487,20 @@
     <script src="assets/vendor/apex/custom/home/earnings.js"></script>
     <script src="assets/vendor/apex/custom/home/gender-age.js"></script>
     <script src="assets/vendor/apex/custom/home/claims.js"></script>
+    <script src="assets/vendor/apex/custom/doc-dashboard/income.js"></script>
+ 
+    
+    <!-- Morris Graphs -->
+    <script src="assets/vendor/morris/raphael-min.js"></script>
+    <script src="assets/vendor/morris/morris.min.js"></script>
+    <script src="assets/vendor/morris/custom/area.js"></script>
+    <script src="assets/vendor/morris/custom/barColors.js"></script>
+    <script src="assets/vendor/morris/custom/dayData.js"></script>
+    <script src="assets/vendor/morris/custom/donutColors.js"></script>
+    <script src="assets/vendor/morris/custom/donutFormatter.js"></script>
+    <script src="assets/vendor/morris/custom/morrisBar.js"></script>
+    <script src="assets/vendor/morris/custom/negativeValues.js"></script>
+    <script src="assets/vendor/morris/custom/stackedBar.js"></script>
 
     <!-- Date Range JS -->
     <script src="assets/vendor/daterange/daterange.js"></script>
