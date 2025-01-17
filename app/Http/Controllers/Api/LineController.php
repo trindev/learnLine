@@ -53,22 +53,26 @@ class LineController extends Controller
             'Sys' => 'nullable|string',
             'Dis' => 'nullable|string',
             'spo2' => 'nullable|string',
+            'lat' => 'nullable|string',
+            'lon' => 'nullable|string',
             'status' => 'nullable|string',
         ]);
 
         $userId = $validatedData['user_id'];
         $type = $validatedData['type'];
         $data = [
-            'temp' => $validatedData['temp'] ?? 'N/A',
-            'HR' => $validatedData['HR'] ?? 'N/A',
-            'Sys' => $validatedData['Sys'] ?? 'N/A',
-            'Dis' => $validatedData['Dis'] ?? 'N/A',
-            'spo2' => $validatedData['spo2'] ?? 'N/A',
+            'temp' => $validatedData['temp'] ?? 0,
+            'HR' => $validatedData['HR'] ?? 0,
+            'Sys' => $validatedData['Sys'] ?? 0,
+            'Dis' => $validatedData['Dis'] ?? 0,
+            'spo2' => $validatedData['spo2'] ?? 0,
+            'lat' => $validatedData['lat'] ?? 0,
+            'lon' => $validatedData['lon'] ?? 0,
             'status' => $validatedData['status'] ?? 'N/A',
         ];
 
         // บันทึกข้อมูลลงฐานข้อมูล
-        if (!$this->saveData($userId, $data['temp'], $data['HR'], $data['Sys'], $data['Dis'], $data['status'], $data['spo2'])) {
+        if (!$this->saveData($userId, $data['temp'], $data['HR'], $data['Sys'], $data['Dis'], $data['status'], $data['spo2'], $data['lat'], $data['lon'])) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Failed to save health data.',
@@ -354,7 +358,7 @@ class LineController extends Controller
     }
 
 
-    private function saveData($userId, $temp, $HR, $Sys, $Dis, $status, $spo2)
+    private function saveData($userId, $temp, $HR, $Sys, $Dis, $status, $spo2, $lat, $lon)
     {
         try {
             $user = User::Where('provider_id', $userId)->first();
@@ -370,6 +374,8 @@ class LineController extends Controller
                 'heart_rate' => $HR,
                 'systolic' => $Sys,
                 'diastolic' => $Dis,
+                'lat' => $lat,
+                'lon' => $lon,
                 'status' => $status,
             ]);
 

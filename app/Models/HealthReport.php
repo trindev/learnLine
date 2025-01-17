@@ -24,5 +24,7 @@ class HealthReport extends Model
         'diastolic',
         'status',
         'spo2',
+        'lat',
+        'lon',
     ];
 }

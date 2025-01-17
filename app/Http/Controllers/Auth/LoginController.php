@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -51,7 +52,6 @@ class LoginController extends Controller
         // Send user's request to Line
         return Socialite::driver('line')->redirect();
     }
-
     // Line callback
     public function handleLineCallback()
     {
@@ -68,7 +68,6 @@ class LoginController extends Controller
             Log::error($e->getMessage());
         }
     }
-
     protected function _registerOrLoginUser($data)
     {
         try {
@@ -119,6 +118,31 @@ class LoginController extends Controller
             $errorMessage = $response->getRawBody();
             \Log::error('Failed to set Rich Menu: ' . $errorMessage); // บันทึกข้อผิดพลาดใน log
             return response()->json(['message' => 'Failed to set Rich Menu: ' . $errorMessage], 500);
+        }
+    }
+
+    public function login(Request $request)
+    {
+        $input = $request->all();
+
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        {
+            if (auth()->user()->is_admin == 1) {
+
+                return redirect()->route('admin');
+
+            }else{
+
+                return redirect()->route('myData');
+            }
+        }else{
+            return redirect()->route('login')
+                ->with('error','Email-Address And Password Are Wrong.');
         }
     }
 }
