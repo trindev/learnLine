@@ -18,14 +18,9 @@ var options = {
   },
   series: [
     {
-      name: "Appointments",
+      name: "ผู้ใช้งาน",
       type: "column",
       data: [10, 40, 15, 40, 20, 35, 20, 10, 31, 43, 56, 29],
-    },
-    {
-      name: "Surgeries",
-      type: "area",
-      data: [2, 8, 25, 7, 20, 20, 51, 35, 42, 20, 33, 67],
     },
   ],
   grid: {

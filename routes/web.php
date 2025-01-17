@@ -18,8 +18,10 @@ use App\Http\Controllers\AdminController;
 Route::controller(AdminController::class)->group(function () {
 
     Route::get('admin', 'index')->name('admin');
+    Route::get('admin/healthchecklist', 'healthchecklist')->name("healthchecklist");
 
 });
+
 Route::get('/', function () {
     return view('welcome');
 });
