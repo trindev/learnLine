@@ -19,6 +19,7 @@ Route::controller(AdminController::class)->group(function () {
 
     Route::get('admin', 'index')->name('admin');
     Route::get('admin/healthchecklist', 'healthchecklist')->name("healthchecklist");
+    Route::get('admin/loginAdmin', 'loginAdmin')->name("loginAdmin");
 
 });
 

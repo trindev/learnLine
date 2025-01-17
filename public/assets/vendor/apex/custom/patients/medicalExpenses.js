@@ -16,11 +16,7 @@ var options = {
   series: [
     {
       name: "Cash",
-      data: [28, 15, 30, 18, 35, 13, 43],
-    },
-    {
-      name: "Card",
-      data: [10, 39, 20, 36, 15, 32, 17],
+      data: [76, 77, 76, 77, 76, 77, 77,77],
     },
   ],
   grid: {
@@ -44,7 +40,16 @@ var options = {
     },
   },
   xaxis: {
-    categories: ["Jan-Feb", "Mar-Apr", "May-June", "Jul-Aug", "Sep-Oct", "Nov-Dec"],
+    categories: [
+      "05/01/2025",
+      "06/01/2025",
+      "07/01/2025",
+      "08/01/2025",
+      "09/01/2025",
+      "11/01/2025",
+      "12/01/2025",
+      "13/01/2025",
+    ],
   },
   colors: ["#116aef", "#d0dfe9"],
   yaxis: {

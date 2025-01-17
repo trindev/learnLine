@@ -145,3 +145,11 @@ var popoverTriggerList = [].slice.call(
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
   return new bootstrap.Popover(popoverTriggerEl);
 });
+
+
+//Longdo Map
+function init() {
+  var map = new longdo.Map({
+    placeholder: document.getElementById('map')
+  });
+}

@@ -18,7 +18,7 @@
 		************ CSS Files *************
 	************* -->
     <link rel="stylesheet" href="assets/fonts/remix/remixicon.css">
-    <link rel="stylesheet" href="assets/css/main.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 
     <!-- *************
 		************ Vendor Css Files *************
@@ -26,6 +26,9 @@
 
     <!-- Scrollbar CSS -->
     <link rel="stylesheet" href="assets/vendor/overlay-scroll/OverlayScrollbars.min.css">
+
+    <!-- Date Range CSS -->
+    <link rel="stylesheet" href="assets/vendor/daterange/daterange.css">
 
     <!-- Data Tables -->
     <link rel="stylesheet" href="assets/vendor/datatables/dataTables.bs5.css">
@@ -120,7 +123,7 @@
         <div class="header-actions">
 
           <!-- Header user settings starts -->
-          <!-- <div class="dropdown ms-2">
+          <div class="dropdown ms-2">
             <a id="userSettings" class="dropdown-toggle d-flex align-items-center" href="#!" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               <div class="avatar-box"><i class="ri-user-fill"></i><span class="status busy"></span></div>
@@ -131,10 +134,18 @@
                 <h6 class="m-0">James Bruton</h6>
               </div>
               <div class="mx-3 my-2 d-grid">
-                <a href="login.html" class="btn btn-danger">Logout</a>
+                 <a class="btn btn-danger" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();" >
+                    <!-- <i class="nav-icon fas fas fa-sign-out-alt"></i> -->
+                    <p>Logout</p>
+                  </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
               </div>
             </div>
-          </div> -->
+          </div>
           <!-- Header user settings ends -->
 
         </div>
@@ -171,7 +182,7 @@
               <li class="active current-page">
                 <a href="{{ url('/admin/healthchecklist') }}">
                   <i class="ri-home-smile-2-line"></i>
-                  <span class="menu-text">รายชื่อผู้ใช้ที่ลงทะเบียนผ่านไลน์</span>
+                  <span class="menu-text">รายชื่อผู้ใช้ที่ลงทะเบียนผ่าน Line</span>
                 </a>
               </li>
               
@@ -330,6 +341,7 @@
                                           <img src="assets/images/doctor.svg" class="img-230 mt-n2" alt="Medical Dashboard">
                                         </div>
                                         <div class="col-sm-6">
+                                          
                                           <div class="text-white mt-3">
                                             <h6>ผลการตรวจ</h6>
                                             <h3>คุณสุทธิดา อำพันสุรินทร์</h3>
@@ -442,6 +454,532 @@
 
 
 
+                                                
+                              <!-- Row start -->
+                              <div class="row gx-3">
+                                <div class="col-sm-12">
+                                  <!-- Card start -->
+                                  <div class="card">
+                                    <div class="card-header">
+
+                                      <!-- Row starts -->
+                                      <div class="row gx-3 justify-content-end align-items-center">
+                                        <div class="col-xl-9">
+                                          <div class="d-flex flex-wrap gap-3">
+                                            <div>
+                                              <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              <span class="fw-semibold ps-1">Weekend</span>
+                                            </div>
+                                            <div>
+                                              <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              <span class="fw-semibold ps-1">Present</span>
+                                            </div>
+                                            <div>
+                                              <i class="ri-checkbox-circle-fill text-danger"></i>
+                                              <span class="fw-semibold ps-1">Leave</span>
+                                            </div>
+                                            <div>
+                                              <i class="ri-checkbox-circle-fill text-success"></i>
+                                              <span class="fw-semibold ps-1">Holiday</span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-xl-3">
+                                          <select name="Month" id="SMonth" class="form-select">
+                                            <option value="0">May 2024</option>
+                                            <option value="1">January</option>
+                                            <option value="2">February</option>
+                                            <option value="3">March</option>
+                                            <option value="4">April</option>
+                                            <option value="5">May</option>
+                                            <option value="6">June</option>
+                                            <option value="7">July</option>
+                                            <option value="8">August</option>
+                                            <option value="9">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <!-- Row ends -->
+
+                                    </div>
+                                    <div class="card-body">
+
+                                      <!-- Table start -->
+                                      <div class="table-responsive">
+                                        <table id="attandance" class="table truncate m-0 align-middle">
+                                          <thead>
+                                            <tr>
+                                              <th>User</th>
+                                              <th>1</th>
+                                              <th>2</th>
+                                              <th>3</th>
+                                              <th>4</th>
+                                              <th>5</th>
+                                              <th>6</th>
+                                              <th>7</th>
+                                              <th>8</th>
+                                              <th>9</th>
+                                              <th>10</th>
+                                              <th>11</th>
+                                              <th>12</th>
+                                              <th>13</th>
+                                              <th>14</th>
+                                              <th>15</th>
+                                              <th>16</th>
+                                              <th>17</th>
+                                              <th>18</th>
+                                              <th>19</th>
+                                              <th>20</th>
+                                              <th>21</th>
+                                              <th>22</th>
+                                              <th>23</th>
+                                              <th>24</th>
+                                              <th>25</th>
+                                              <th>26</th>
+                                              <th>27</th>
+                                              <th>28</th>
+                                              <th>29</th>
+                                              <th>30</th>
+                                              <th>31</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr>
+                                              <td>&nbsp;</td>
+                                              <td class="small text-secondary">S</td>
+                                              <td class="small">M</td>
+                                              <td class="small">T</td>
+                                              <td class="small">W</td>
+                                              <td class="small">T</td>
+                                              <td class="small">F</td>
+                                              <td class="small text-secondary">S</td>
+                                              <td class="small text-secondary">S</td>
+                                              <td class="small">M</td>
+                                              <td class="small">T</td>
+                                              <td class="small">W</td>
+                                              <td class="small">T</td>
+                                              <td class="small">F</td>
+                                              <td class="small text-secondary">S</td>
+                                              <td class="small text-secondary">S</td>
+                                              <td class="small">M</td>
+                                              <td class="small">T</td>
+                                              <td class="small">W</td>
+                                              <td class="small">T</td>
+                                              <td class="small">F</td>
+                                              <td class="small text-secondary">S</td>
+                                              <td class="small text-secondary">S</td>
+                                              <td class="small">M</td>
+                                              <td class="small">T</td>
+                                              <td class="small">W</td>
+                                              <td class="small">T</td>
+                                              <td class="small">F</td>
+                                              <td class="small text-secondary">S</td>
+                                              <td class="small text-secondary">S</td>
+                                              <td class="small">M</td>
+                                              <td class="small">T</td>
+                                            </tr>
+                                            <tr>
+                                              <td>ความดันโลหิต</td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-danger"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-success"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-danger"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>อัตราการเต้นหัวใจ</td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-success"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-danger"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-danger"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-danger"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>อุณหภูมิ</td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-success"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-danger"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-danger"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>SpO2</td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-danger"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-success"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-secondary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                              <td>
+                                                <i class="ri-checkbox-circle-fill text-primary"></i>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                      <!-- Table end -->
+
+                                    </div>
+                                  </div>
+                                  <!-- Card end -->
+
+                                </div>
+                              </div>
+                              <!-- Row end -->
+
+
+
                               <!-- Row starts -->
                               <div class="row gx-3 ">
                                 <div class="col-xxl-12 col-sm-12">
@@ -467,25 +1005,25 @@
                                                     <h6>Blood Pressure</h6>
 
                                                     <div class="chart-height">
-                                                      <div id="areaGraph"></div>
+                                                      <!-- <div id="areaGraph"></div> -->
+                                                      <div id="bpLevels"></div> 
+                                                        <ul class="list-group">
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>24/04/2024</div>
+                                                            <div>140</div>
+                                                          </li>
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>16/04/2024</div>
+                                                            <div>190</div>
+                                                          </li>
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>10/04/2024</div>
+                                                            <div>230</div>
+                                                          </li>
+                                                        </ul>
                                                     </div>
                                                   </div>
                                                 </div>
-
-                                                <ul class="list-group">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                      24/12/2024
-                                                      <span class="badge text-body ">130</span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                      16/12/2024
-                                                      <span class="badge text-body ">190</span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    10/12/2024
-                                                      <span class="badge text-body ">140</span>
-                                                    </li>
-                                                  </ul>
 
                                               </div>
                                             </div>
@@ -507,26 +1045,24 @@
                                                     <h6>Health</h6>
 
                                                     <div class="chart-height">
-                                                      <div id="areaGraph2"></div>
+                                                     <div id="sugarLevels"></div>
+                                                        <ul class="list-group">
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>24/04/2024</div>
+                                                            <div>140</div>
+                                                          </li>
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>16/04/2024</div>
+                                                            <div>190</div>
+                                                          </li>
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>10/04/2024</div>
+                                                            <div>230</div>
+                                                          </li>
+                                                        </ul>
                                                     </div>
                                                   </div>
                                                 </div>
-
-                                                <ul class="list-group">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                      24/12/2024
-                                                      <span class="badge text-body ">130</span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                      16/12/2024
-                                                      <span class="badge text-body ">190</span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    10/12/2024
-                                                      <span class="badge text-body ">140</span>
-                                                    </li>
-                                                  </ul>
-
                                               </div>
                                             </div>
                                           </div>
@@ -547,26 +1083,24 @@
                                                     <h6>Heart Rate</h6>
 
                                                     <div class="chart-height">
-                                                      <div id="areaGraph3"></div>
+                                                      <div id="heartRate"></div>
+                                                        <ul class="list-group">
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>24/04/2024</div>
+                                                            <div>140</div>
+                                                          </li>
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>16/04/2024</div>
+                                                            <div>190</div>
+                                                          </li>
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>10/04/2024</div>
+                                                            <div>230</div>
+                                                          </li>
+                                                        </ul>
                                                     </div>
                                                   </div>
                                                 </div>
-
-                                                <ul class="list-group">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                      24/12/2024
-                                                      <span class="badge text-body ">130</span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                      16/12/2024
-                                                      <span class="badge text-body ">190</span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    10/12/2024
-                                                      <span class="badge text-body ">140</span>
-                                                    </li>
-                                                  </ul>
-
                                               </div>
                                             </div>
                                           </div>
@@ -587,26 +1121,24 @@
                                                   <h6>Body Temperature</h6>
 
                                                     <div class="chart-height">
-                                                      <div id="areaGraph4"></div>
+                                                      <div id="clolesterolLevels"></div>
+                                                        <ul class="list-group">
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>24/04/2024</div>
+                                                            <div>140</div>
+                                                          </li>
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>16/04/2024</div>
+                                                            <div>190</div>
+                                                          </li>
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>10/04/2024</div>
+                                                            <div>230</div>
+                                                          </li>
+                                                        </ul>
                                                     </div>
                                                   </div>
                                                 </div>
-
-                                                <ul class="list-group">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                      24/12/2024
-                                                      <span class="badge text-body ">130</span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                      16/12/2024
-                                                      <span class="badge text-body ">190</span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    10/12/2024
-                                                      <span class="badge text-body ">140</span>
-                                                    </li>
-                                                  </ul>
-
                                               </div>
                                             </div>
                                           </div>
@@ -622,7 +1154,61 @@
                               <!-- Row ends -->
 
 
+                              
+                                                
+                              <!-- Row start -->
+                              <div class="row gx-3">
+                                <div class="col-xl-6">
+                                  <div class="card mb-3">
+                                    <div class="card-header">
+                                      <h5 class="card-title">ความดันโลหิต <label class="text-success">+HR</label></h5>
+                                    </div>
+                                    <div class="card-body">
+                                    <div id="candleStick"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-xl-6">
+                                  <div class="card mb-3">
+                                    <div class="card-header">
+                                      <h5 class="card-title text-success">อัตราการเต้นหัวใจ</h5>
+                                    </div>
+                                    <div class="card-body">
+                                      <div id="negativeValues" class="chart-height-lg"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- Row ends -->
 
+                                   
+                              <!-- Row start -->
+                              <div class="row gx-3">
+                                <div class="col-xl-6">
+                                  <div class="card mb-3">
+                                    <div class="card-header">
+                                      <h5 class="card-title">อ็อกซิเจนในเลือด (SpO2) </h5>
+                                    </div>
+                                    <div class="card-body">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-xl-6">
+                                  <div class="card mb-3">
+                                    <div class="card-header">
+                                      <h5 class="card-title">อุณหภูมิร่างกาย</h5>
+                                    </div>
+                                    <div class="card-body">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- Row ends -->
+
+
+
+
+                              
 
                           </div>
                           <div class="modal-footer">
@@ -669,7 +1255,7 @@
 
           <!-- App footer starts -->
           <div class="app-footer bg-white">
-            <span>© Medflex admin 2024</span>
+          <span>© Smart Health Monitor</span>
           </div>
           <!-- App footer ends -->
 
@@ -703,30 +1289,26 @@
     <script src="assets/vendor/datatables/dataTables.bootstrap.min.js"></script>
     <script src="assets/vendor/datatables/custom/custom-datatables.js"></script>
 
+    <!-- Apex js -->
+    <script src="assets/vendor/apex/apexcharts.min.js"></script>
+    <script src="assets/vendor/apex/custom/patients/sparklines.js"></script>
+    <script src="assets/vendor/apex/custom/graphs/candlestick.js"></script>
+
+    
+    
+    <!-- Morris Graphs -->
+    <script src="assets/vendor/morris/raphael-min.js"></script>
+    <script src="assets/vendor/morris/morris.min.js"></script>
+    <script src="assets/vendor/morris/custom/negativeValues.js"></script>
+
+    
     <!-- Date Range JS -->
     <script src="assets/vendor/daterange/daterange.js"></script>
     <script src="assets/vendor/daterange/custom-daterange.js"></script>
 
+    
     <!-- Custom JS files -->
     <script src="assets/js/custom.js"></script>
-
-    
-    <!-- Apex js -->
-    <script src="assets/vendor/apex/apexcharts.min.js"></script>
-    <script src="assets/vendor/apex/custom/graphs/area.js"></script>
-    <script src="assets/vendor/apex/custom/graphs/line.js"></script>
-    <script src="assets/vendor/apex/custom/graphs/bar.js"></script>
-    <script src="assets/vendor/apex/custom/graphs/column-area.js"></script>
-    <script src="assets/vendor/apex/custom/graphs/candlestick.js"></script>
-    <script src="assets/vendor/apex/custom/graphs/heatmap.js"></script>
-    <script src="assets/vendor/apex/custom/graphs/donut.js"></script>
-    <script src="assets/vendor/apex/custom/graphs/pie.js"></script>
-    <script src="assets/vendor/apex/custom/graphs/gauge.js"></script>
-    <script src="assets/vendor/apex/custom/graphs/radial-bar.js"></script>
-    <script src="assets/vendor/apex/custom/graphs/funnel.js"></script>
-    <script src="assets/vendor/apex/custom/graphs/pyramid.js"></script>
-
-
   </body>
 
 </html>

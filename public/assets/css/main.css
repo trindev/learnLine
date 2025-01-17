@@ -13861,7 +13861,7 @@ input[type=file]::file-selector-button {
 
 .sidebar-wrapper {
   background-color: #ffffff;
-  width: 250px;
+  width: 270px;
   position: fixed;
   top: 50px;
   left: 0;
@@ -13876,7 +13876,7 @@ input[type=file]::file-selector-button {
   padding: 10px 15px 10px 50px;
   background: #0ebb13;
   color: #ffffff;
-  margin: 18px 20px 8px 20px;
+  margin: 100px 20px 8px 20px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -14189,7 +14189,7 @@ input[type=file]::file-selector-button {
 }
 
 .app-body {
-  padding: 1.5rem 1.5rem 1.25rem 1.5rem;
+  padding: 1.5rem 1.5rem 1.25rem 2.5rem;
   min-height: calc(100vh - 155px);
 }
 
