@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Gallery - Medical Admin Templates & Dashboards</title>
+    <title>Smart Health Monitor</title>
     <base href="{{ \URL::to('/') }}">
 
     <!-- Meta -->
@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="assets/vendor/datatables/dataTables.bs5-custom.css">
     <link rel="stylesheet" href="assets/vendor/datatables/buttons/dataTables.bs5-custom.css">
 
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
@@ -185,12 +185,12 @@
                   <span class="menu-text">รายชื่อผู้ใช้ที่ลงทะเบียนผ่าน Line</span>
                 </a>
               </li>
-              
+
             </ul>
           </div>
           <!-- Sidebar menu ends -->
 
-          
+
           <!-- Sidebar contact starts -->
           <div class="sidebar-contact">
             <p class="fw-light mb-1 text-nowrap text-truncate">ติดต่อ</p>
@@ -315,7 +315,7 @@
                     </div>
                     <!-- Table ends -->
 
-                    
+
                     <!-- Modal Fullscreen -->
                     <div class="modal fade" id="exampleModalFullscreen" tabindex="-1"
                       aria-labelledby="exampleModalFullscreenLabel" aria-hidden="true">
@@ -328,7 +328,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                                          
+
                               <!-- Row starts -->
                               <div class="row gx-3">
                                 <div class="col-xxl-6 col-sm-12">
@@ -341,7 +341,7 @@
                                           <img src="assets/images/doctor.svg" class="img-230 mt-n2" alt="Medical Dashboard">
                                         </div>
                                         <div class="col-sm-6">
-                                          
+
                                           <div class="text-white mt-3">
                                             <h6>ผลการตรวจ</h6>
                                             <h3>คุณสุทธิดา อำพันสุรินทร์</h3>
@@ -363,7 +363,7 @@
                                     </div>
                                   </div>
                                 </div>
-                      
+
                                 <div class="col-xxl-6 col-sm-12">
                                     <div class="card mb-3">
                                       <div class="card-header text-center ">
@@ -397,7 +397,7 @@
                                         </div>
                                       </div>
 
-                                      
+
                                       <div class="col-xxl-4 col-sm-12">
                                         <div class="card mb-3 text-center">
                                           <div class="card-header bg-warning">
@@ -423,7 +423,7 @@
                                         </div>
                                       </div>
 
-                                      
+
                                       <div class="col-xxl-4 col-sm-12">
                                         <div class="card mb-3 text-center">
                                           <div class="card-header bg-danger">
@@ -454,7 +454,7 @@
 
 
 
-                                                
+
                               <!-- Row start -->
                               <div class="row gx-3">
                                 <div class="col-sm-12">
@@ -990,7 +990,7 @@
                                       <div class="card-body text-bg-light">
                                         <div class="row gx-3 ">
 
-                                        
+
                                           <!-- Card details start -->
                                           <div class="col-xxl-3 col-sm-12">
                                             <div class="card mb-3">
@@ -1006,7 +1006,7 @@
 
                                                     <div class="chart-height">
                                                       <!-- <div id="areaGraph"></div> -->
-                                                      <div id="bpLevels"></div> 
+                                                      <div id="bpLevels"></div>
                                                         <ul class="list-group">
                                                           <li class="list-group-item d-flex justify-content-between align-items-center">
                                                             <div>24/04/2024</div>
@@ -1030,7 +1030,7 @@
                                           </div>
                                           <!-- Card details end -->
 
-                                          
+
                                           <!-- Card details start -->
                                           <div class="col-xxl-3 col-sm-12">
                                             <div class="card mb-3">
@@ -1067,8 +1067,8 @@
                                             </div>
                                           </div>
                                           <!-- Card details end -->
-                                          
-                                          
+
+
                                           <!-- Card details start -->
                                           <div class="col-xxl-3 col-sm-12">
                                             <div class="card mb-3">
@@ -1105,8 +1105,8 @@
                                             </div>
                                           </div>
                                           <!-- Card details end -->
-                                          
-                                          
+
+
                                           <!-- Card details start -->
                                           <div class="col-xxl-3 col-sm-12">
                                             <div class="card mb-3">
@@ -1143,7 +1143,7 @@
                                             </div>
                                           </div>
                                           <!-- Card details end -->
-                                          
+
 
 
                                         </div>
@@ -1154,8 +1154,8 @@
                               <!-- Row ends -->
 
 
-                              
-                                                
+
+
                               <!-- Row start -->
                               <div class="row gx-3">
                                 <div class="col-xl-6">
@@ -1181,7 +1181,7 @@
                               </div>
                               <!-- Row ends -->
 
-                                   
+
                               <!-- Row start -->
                               <div class="row gx-3">
                                 <div class="col-xl-6">
@@ -1208,7 +1208,7 @@
 
 
 
-                              
+
 
                           </div>
                           <div class="modal-footer">
@@ -1294,19 +1294,19 @@
     <script src="assets/vendor/apex/custom/patients/sparklines.js"></script>
     <script src="assets/vendor/apex/custom/graphs/candlestick.js"></script>
 
-    
-    
+
+
     <!-- Morris Graphs -->
     <script src="assets/vendor/morris/raphael-min.js"></script>
     <script src="assets/vendor/morris/morris.min.js"></script>
     <script src="assets/vendor/morris/custom/negativeValues.js"></script>
 
-    
+
     <!-- Date Range JS -->
     <script src="assets/vendor/daterange/daterange.js"></script>
     <script src="assets/vendor/daterange/custom-daterange.js"></script>
 
-    
+
     <!-- Custom JS files -->
     <script src="assets/js/custom.js"></script>
   </body>

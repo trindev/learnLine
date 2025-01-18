@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Gallery - Medical Admin Templates & Dashboards</title>
+    <title>Smart Health Monitor</title>
 
     <!-- Meta -->
     <meta name="description" content="Marketplace for Bootstrap Admin Dashboards">
@@ -25,7 +25,7 @@
 
     <!-- Scrollbar CSS -->
     <link rel="stylesheet" href="assets/vendor/overlay-scroll/OverlayScrollbars.min.css">
-    
+
     <!-- Date Range CSS -->
     <link rel="stylesheet" href="assets/vendor/daterange/daterange.css">
 
@@ -53,7 +53,7 @@
         font-size: 19px;
       }
     </style>
-    
+
   </head>
 
   <body  onload="init();">
@@ -180,12 +180,12 @@
                   <span class="menu-text">รายชื่อผู้ใช้ที่ลงทะเบียนผ่าน Line</span>
                 </a>
               </li>
-              
+
             </ul>
           </div>
           <!-- Sidebar menu ends -->
 
-          
+
           <!-- Sidebar contact starts -->
           <div class="sidebar-contact">
             <p class="fw-light mb-1 text-nowrap text-truncate">ติดต่อ</p>
@@ -275,7 +275,7 @@
                   </div>
                 </div>
               </div>
-    
+
               <div class="col-xxl-6 col-sm-12">
                   <div class="card mb-3">
                     <div class="card-header text-center ">
@@ -300,7 +300,7 @@
                             <div class="badge bg-success d-flex align-items-center justify-content-center" style="height: 40px; width: 150px;">
                               <h5 class="m-0">อุณหภูมิร่างกาย</h5>
                             </div>
-                           
+
                           </div>
                         </div>
                         <!-- Card details end -->
@@ -308,7 +308,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <div class="col-xxl-4 col-sm-12">
                     <div class="card mb-3">
                       <div class="card-body mh-230">
@@ -332,7 +332,7 @@
                     </div>
                   </div>
 
-                  
+
                   <div class="col-xxl-4 col-sm-12">
                     <div class="card mb-3">
                       <div class="card-body mh-230">
@@ -387,7 +387,7 @@
                         <h5 class="card-title">การใช้งานทั้งหมด</h5>
                       </div>
                       <div class="col-xxl-6 col-sm-12">
-                        
+
                         <div class="row g-3">
                           <div class="col-sm-12 col-12">
                             <div class="border rounded-2 d-flex align-items-center flex-row p-2">
@@ -509,8 +509,8 @@
     <script src="assets/vendor/apex/custom/home/gender-age.js"></script>
     <script src="assets/vendor/apex/custom/home/claims.js"></script>
     <script src="assets/vendor/apex/custom/doc-dashboard/income.js"></script>
- 
-    
+
+
     <!-- Morris Graphs -->
     <script src="assets/vendor/morris/raphael-min.js"></script>
     <script src="assets/vendor/morris/morris.min.js"></script>
