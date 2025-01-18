@@ -17,7 +17,7 @@
 		************ CSS Files *************
 	************* -->
     <link rel="stylesheet" href="assets/fonts/remix/remixicon.css">
-    <link rel="stylesheet" href="assets/css/main.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 
     <!-- *************
 		************ Vendor Css Files *************
@@ -33,6 +33,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
+
+    <script src="https://api.longdo.com/map/?key=9ee51221cc2cf526d8860ecd9b330d78"></script>
 
     <style>
       body {
@@ -51,10 +53,10 @@
         font-size: 19px;
       }
     </style>
-      
+    
   </head>
 
-  <body>
+  <body  onload="init();">
 
     <!-- Loading starts -->
     <div id="loading-wrapper">
@@ -116,7 +118,7 @@
         <div class="header-actions">
 
           <!-- Header user settings starts -->
-          <!-- <div class="dropdown ms-2">
+          <div class="dropdown ms-2">
             <a id="userSettings" class="dropdown-toggle d-flex align-items-center" href="#!" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               <div class="avatar-box"><i class="ri-user-fill"></i><span class="status busy"></span></div>
@@ -124,13 +126,21 @@
             <div class="dropdown-menu dropdown-menu-end shadow-lg">
               <div class="px-3 py-2">
                 <span class="small">Admin</span>
-                <h6 class="m-0">James Bruton</h6>
+                <!-- <h6 class="m-0">James Bruton</h6> -->
               </div>
               <div class="mx-3 my-2 d-grid">
-                <a href="login.html" class="btn btn-danger">Logout</a>
+                 <a class="btn btn-danger" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();" >
+                    <!-- <i class="nav-icon fas fas fa-sign-out-alt"></i> -->
+                    <p>Logout</p>
+                  </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
               </div>
             </div>
-          </div> -->
+          </div>
           <!-- Header user settings ends -->
 
         </div>
@@ -167,7 +177,7 @@
               <li>
                 <a href="{{ url('/admin/healthchecklist') }}">
                   <i class="ri-home-smile-2-line"></i>
-                  <span class="menu-text">รายชื่อผู้ใช้ที่ลงทะเบียนผ่านไลน์</span>
+                  <span class="menu-text">รายชื่อผู้ใช้ที่ลงทะเบียนผ่าน Line</span>
                 </a>
               </li>
               
@@ -364,12 +374,13 @@
                   <div class="card-header">
                     <h5 class="card-title">ตำแหน่งการใช้งานอุปกรณ์</h5>
                   </div>
-                  <div class="card-body">
+                  <div class="card-body" style="height: 920px;">
+                    <div id="map" style="height: 100%;"></div>
                   </div>
                 </div>
               </div>
               <div class="col-xxl-6 col-sm-12">
-                <div class="card mb-3">
+                <div class="card mb-3 pb-5">
                   <div class="card-header">
                     <div class="row gx-3">
                       <div class="col-xxl-6 col-sm-12">
@@ -400,9 +411,12 @@
                   </div>
                   <div class="card-body">
                     <!-- <div id="patients"></div> -->
-                    <div id="barColors" class="chart-height-lg"></div>
+                    <!-- <div id="barColors" class="chart-height-lg"></div> -->
+                    <div id="morrisBar" class="chart-height-lg"></div>
                     <div id="legend" style="text-align: center; margin-top: 10px;">
-                      <span style="display: inline-block; width: 10px; height: 10px; background-color: #1169f6; margin-right: 5px;"></span> การใช้ (ครั้ง)
+                      <span style="display: inline-block; width: 10px; height: 10px; background-color: #1169f6; margin-right: 5px;"></span> อุณหภูมิร่างกาย
+                      <span style="display: inline-block; width: 10px; height: 10px; background-color: #248a66; margin-right: 5px;"></span> อ็อกซิเจนในเลือด
+                      <span style="display: inline-block; width: 10px; height: 10px; background-color: #95cdb8; margin-right: 5px;"></span> ความดันโลหิต
                     </div>
                   </div>
                 </div>
@@ -440,6 +454,10 @@
                   </div>
                 </div>
 
+                <script>
+                  var marker = new longdo.Marker({ lon: 100.56, lat: 13.74 });
+                  map.Overlays.add(marker);
+                </script>
 
               </div>
 
@@ -448,9 +466,12 @@
           </div>
           <!-- App body ends -->
 
+
+
+
           <!-- App footer starts -->
           <div class="app-footer bg-white">
-            <span>© Medflex admin 2024</span>
+            <span>© Smart Health Monitor</span>
           </div>
           <!-- App footer ends -->
 

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +15,12 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::controller(AdminController::class)->group(function () {
 
+    Route::get('admin', 'index')->name('admin');
+    Route::get('admin/healthchecklist', 'healthchecklist')->name("healthchecklist");
+
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,9 +40,4 @@ Route::controller(HomeController::class)->group(function () {
 
     Route::get('home', 'index')->name('home');
     Route::get('myData', 'myData')->name('myData');
-});
-
-Route::middleware('adminAuth')->controller(AdminController::class)->group(function () {
-    Route::get('admin', 'index')->name('admin');
-    Route::get('admin/healthchecklist', 'healthchecklist')->name('healthchecklist');
 });

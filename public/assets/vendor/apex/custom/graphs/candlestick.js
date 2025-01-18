@@ -71,7 +71,6 @@ var options = {
       },
     },
   },
-
   grid: {
     borderColor: "#dfd6ff",
   },
@@ -82,6 +81,46 @@ var options = {
     tooltip: {
       enabled: true,
     },
+  },
+  annotations: {
+    yaxis: [
+      {
+        y: 6650,
+        borderColor: "#248a66",
+        label: {
+          borderColor: "#248a66",
+          style: {
+            color: "#fff",
+            background: "#248a66",
+          },
+          text: "Constant Value 6700",
+        },
+      },
+      {
+        y: 6590,
+        borderColor: "#FF4560",
+        label: {
+          borderColor: "#FF4560",
+          style: {
+            color: "#fff",
+            background: "#FF4560",
+          },
+          text: "Constant Value 6500",
+        },
+      },
+      {
+        y: 6580,
+        borderColor: "#775DD0",
+        label: {
+          borderColor: "#775DD0",
+          style: {
+            color: "#fff",
+            background: "#775DD0",
+          },
+          text: "Constant Value 6400",
+        },
+      },
+    ],
   },
 };
 

@@ -17,5 +17,10 @@ class AdminController extends Controller
     {
         return view('admin.healthchecklist');
     }
+    
+    public function loginAdmin()
+    {
+        return view('admin.loginAdmin');
+    }
 
 }
